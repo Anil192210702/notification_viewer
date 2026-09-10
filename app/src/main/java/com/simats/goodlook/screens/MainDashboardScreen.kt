@@ -82,6 +82,9 @@ fun MainDashboardScreen(
 
     var userAlerts by remember { mutableStateOf<List<com.simats.com.network.response.NotificationItem>>(emptyList()) }
     var showAlertsDialog by remember { mutableStateOf(false) }
+    
+    var profileName by remember { mutableStateOf(com.simats.goodlook.SessionManager.loggedInUser) }
+    var profileImageBase64 by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
         try {
@@ -107,6 +110,15 @@ fun MainDashboardScreen(
             val alertRes = com.simats.com.network.response.ApiClient.apiService.getUserAlerts(com.simats.com.network.request.GetNotificationsRequest(com.simats.goodlook.SessionManager.loggedInEmail))
             if(alertRes.isSuccessful) {
                 userAlerts = alertRes.body()?.notifications ?: emptyList()
+            }
+            
+            val profRes = com.simats.com.network.response.ApiClient.apiService.getProfile(com.simats.com.network.request.GetProfileRequest(com.simats.goodlook.SessionManager.loggedInEmail))
+            if(profRes.isSuccessful) {
+                val body = profRes.body()
+                if (!body?.full_name.isNullOrEmpty()) {
+                    profileName = body!!.full_name
+                }
+                profileImageBase64 = body?.profile_image_base64 ?: ""
             }
         } catch (e: Exception) {}
     }
@@ -143,12 +155,25 @@ fun MainDashboardScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Box(modifier = Modifier.size(44.dp).clip(CircleShape).background(Color(0xFFE5E7EB)))
+                Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.clickable { onSettingsClick() }) {
+                    Box(modifier = Modifier.size(44.dp).clip(CircleShape).background(Color(0xFFE5E7EB)), contentAlignment = Alignment.Center) {
+                        val bitmap = try {
+                            if (profileImageBase64.isNotEmpty()) {
+                                val decoded = android.util.Base64.decode(profileImageBase64, android.util.Base64.DEFAULT)
+                                android.graphics.BitmapFactory.decodeByteArray(decoded, 0, decoded.size)?.androidx.compose.ui.graphics.asImageBitmap()
+                            } else null
+                        } catch(e: Exception) { null }
+                        
+                        if (bitmap != null) {
+                            androidx.compose.foundation.Image(bitmap = bitmap, contentDescription = "Profile", contentScale = androidx.compose.ui.layout.ContentScale.Crop, modifier = Modifier.fillMaxSize())
+                        } else {
+                            Icon(Icons.Default.Person, contentDescription = null, tint = Color.Gray, modifier = Modifier.size(24.dp))
+                        }
+                    }
                     Spacer(modifier = Modifier.width(12.dp))
                     Column {
                         Text("Good Evening,", style = MaterialTheme.typography.bodySmall, color = Color.Gray)
-                        Text(com.simats.goodlook.SessionManager.loggedInUser, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = Color.Black)
+                        Text(profileName, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, color = Color.Black)
                     }
                 }
                 IconButton(onClick = { showAlertsDialog = true }) {

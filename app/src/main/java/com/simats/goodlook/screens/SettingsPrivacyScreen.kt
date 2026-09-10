@@ -28,6 +28,23 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun SettingsPrivacyScreen(onNavigate: (String) -> Unit = {}) {
+    var profileName by remember { mutableStateOf(com.simats.goodlook.SessionManager.loggedInUser) }
+    var profileImageBase64 by remember { mutableStateOf("") }
+    
+    LaunchedEffect(Unit) {
+        val userEmail = com.simats.goodlook.SessionManager.loggedInEmail
+        try {
+            val res = com.simats.com.network.response.ApiClient.apiService.getProfile(com.simats.com.network.request.GetProfileRequest(userEmail))
+            if(res.isSuccessful) {
+                val body = res.body()
+                if (!body?.full_name.isNullOrEmpty()) {
+                    profileName = body!!.full_name
+                }
+                profileImageBase64 = body?.profile_image_base64 ?: ""
+            }
+        } catch(e: Exception) {}
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -51,6 +68,7 @@ fun SettingsPrivacyScreen(onNavigate: (String) -> Unit = {}) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .clickable { onNavigate("profile") }
                 .background(
                     brush = Brush.horizontalGradient(
                         colors = listOf(Color(0xFF00E676), Color(0xFF2979FF))
@@ -65,14 +83,33 @@ fun SettingsPrivacyScreen(onNavigate: (String) -> Unit = {}) {
                     modifier = Modifier
                         .size(72.dp)
                         .clip(CircleShape)
-                        .background(Color.White.copy(alpha = 0.5f))
-                )
+                        .background(Color.White.copy(alpha = 0.5f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    val bitmap = try {
+                        if (profileImageBase64.isNotEmpty()) {
+                            val decoded = android.util.Base64.decode(profileImageBase64, android.util.Base64.DEFAULT)
+                            android.graphics.BitmapFactory.decodeByteArray(decoded, 0, decoded.size)?.androidx.compose.ui.graphics.asImageBitmap()
+                        } else null
+                    } catch(e: Exception) { null }
+                    
+                    if (bitmap != null) {
+                        androidx.compose.foundation.Image(
+                            bitmap = bitmap, 
+                            contentDescription = "Profile", 
+                            contentScale = androidx.compose.ui.layout.ContentScale.Crop, 
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    } else {
+                        Icon(Icons.Default.Person, contentDescription = null, tint = Color.White, modifier = Modifier.size(36.dp))
+                    }
+                }
                 
                 Spacer(modifier = Modifier.width(16.dp))
                 
                 Column {
                     Text(
-                        text = com.simats.goodlook.SessionManager.loggedInUser,
+                        text = profileName,
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
                         color = Color.White
