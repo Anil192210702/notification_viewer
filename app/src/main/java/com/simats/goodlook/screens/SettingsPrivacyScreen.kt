@@ -25,6 +25,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.foundation.clickable
 
 @Composable
 fun SettingsPrivacyScreen(onNavigate: (String) -> Unit = {}) {
@@ -89,7 +91,7 @@ fun SettingsPrivacyScreen(onNavigate: (String) -> Unit = {}) {
                     val bitmap = try {
                         if (profileImageBase64.isNotEmpty()) {
                             val decoded = android.util.Base64.decode(profileImageBase64, android.util.Base64.DEFAULT)
-                            android.graphics.BitmapFactory.decodeByteArray(decoded, 0, decoded.size)?.androidx.compose.ui.graphics.asImageBitmap()
+                            android.graphics.BitmapFactory.decodeByteArray(decoded, 0, decoded.size)?.asImageBitmap()
                         } else null
                     } catch(e: Exception) { null }
                     

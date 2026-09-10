@@ -22,6 +22,8 @@ import kotlinx.coroutines.launch
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.foundation.clickable
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
@@ -160,7 +162,7 @@ fun MainDashboardScreen(
                         val bitmap = try {
                             if (profileImageBase64.isNotEmpty()) {
                                 val decoded = android.util.Base64.decode(profileImageBase64, android.util.Base64.DEFAULT)
-                                android.graphics.BitmapFactory.decodeByteArray(decoded, 0, decoded.size)?.androidx.compose.ui.graphics.asImageBitmap()
+                                android.graphics.BitmapFactory.decodeByteArray(decoded, 0, decoded.size)?.asImageBitmap()
                             } else null
                         } catch(e: Exception) { null }
                         
