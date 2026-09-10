@@ -118,6 +118,7 @@ fun AdminDashboardScreen(onNavigate: (String) -> Unit = {}) {
     }
     
     if (showAdminSettingsAlertsDialog) {
+        val context = androidx.compose.ui.platform.LocalContext.current
         AlertDialog(
             onDismissRequest = { showAdminSettingsAlertsDialog = false },
             title = { Text("User Permission Alerts") },
@@ -133,7 +134,21 @@ fun AdminDashboardScreen(onNavigate: (String) -> Unit = {}) {
                     }
                 }
             },
-            confirmButton = { TextButton(onClick = { showAdminSettingsAlertsDialog = false }) { Text("Close") } }
+            confirmButton = { TextButton(onClick = { showAdminSettingsAlertsDialog = false }) { Text("Close") } },
+            dismissButton = {
+                TextButton(onClick = { 
+                    scope.launch {
+                        try {
+                            val req = com.simats.com.network.request.ClearDataRequest("admin", "notifications")
+                            val res = ApiClient.apiService.clearData(req)
+                            if (res.isSuccessful) {
+                                settingsAlerts = emptyList()
+                                android.widget.Toast.makeText(context, "Deleted successfully from DB!", android.widget.Toast.LENGTH_SHORT).show()
+                            }
+                        } catch(e: Exception) {}
+                    }
+                }) { Text("Clear Data", color = Color.Red, fontWeight = FontWeight.Bold) }
+            }
         )
     }
 }
