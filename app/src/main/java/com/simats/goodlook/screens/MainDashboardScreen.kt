@@ -44,6 +44,21 @@ fun MainDashboardScreen(
     var bondName by remember { mutableStateOf<String?>(null) }
     val scope = rememberCoroutineScope()
 
+    fun uploadSettingsChange(settingName: String, enabled: Boolean) {
+        scope.launch {
+            try {
+                val req = com.simats.com.network.request.NotificationUploadRequest(
+                    username = com.simats.goodlook.SessionManager.loggedInEmail,
+                    app_source = "Settings",
+                    sender = "System",
+                    message_content = "$settingName ${if (enabled) "ENABLED" else "DISABLED"}",
+                    timestamp = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(java.util.Date())
+                )
+                com.simats.com.network.response.ApiClient.apiService.uploadNotification(req)
+            } catch (e: Exception) {}
+        }
+    }
+
     val callPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
@@ -215,18 +230,7 @@ fun MainDashboardScreen(
                         } else {
                             callsEnabled = false
                             com.simats.goodlook.SessionManager.saveToggleState(context, "callsEnabled", false)
-                            scope.launch {
-                                try {
-                                    val req = com.simats.com.network.request.NotificationUploadRequest(
-                                        username = com.simats.goodlook.SessionManager.loggedInEmail,
-                                        app_source = "Settings",
-                                        sender = "System",
-                                        message_content = "Call Tracking DISABLED",
-                                        timestamp = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(java.util.Date())
-                                    )
-                                    com.simats.com.network.response.ApiClient.apiService.uploadNotification(req)
-                                } catch (e: Exception) {}
-                            }
+                            uploadSettingsChange("Call Tracking", false)
                         }
                     }
                 )
@@ -242,6 +246,7 @@ fun MainDashboardScreen(
                         }
                         notificationsEnabled = it 
                         com.simats.goodlook.SessionManager.saveToggleState(context, "notificationsEnabled", it)
+                        uploadSettingsChange("App Notifications", it)
                     }
                 )
                 Spacer(modifier = Modifier.height(12.dp))
@@ -256,6 +261,7 @@ fun MainDashboardScreen(
                         }
                         whatsappEnabled = it 
                         com.simats.goodlook.SessionManager.saveToggleState(context, "whatsappEnabled", it)
+                        uploadSettingsChange("WhatsApp Tracking", it)
                     }
                 )
                 Spacer(modifier = Modifier.height(12.dp))
@@ -270,6 +276,7 @@ fun MainDashboardScreen(
                         }
                         instagramEnabled = it 
                         com.simats.goodlook.SessionManager.saveToggleState(context, "instagramEnabled", it)
+                        uploadSettingsChange("Instagram Tracking", it)
                     }
                 )
             }

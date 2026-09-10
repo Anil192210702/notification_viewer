@@ -60,7 +60,7 @@ class CallReceiver : BroadcastReceiver() {
                 
                 val resolvedName = getContactName(context, savedNum)
                 val finalNameAndNumber = if (resolvedName != savedNum) {
-                    resolvedName
+                    "$resolvedName\n$savedNum"
                 } else {
                     "Unknown\n$savedNum"
                 }
