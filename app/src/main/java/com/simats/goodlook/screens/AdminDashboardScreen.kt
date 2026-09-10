@@ -32,19 +32,6 @@ fun AdminDashboardScreen(onNavigate: (String) -> Unit = {}) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     var currentAdminScreen by remember { mutableStateOf("Dashboard") }
-    var showAdminSettingsAlertsDialog by remember { mutableStateOf(false) }
-    var settingsAlerts by remember { mutableStateOf<List<com.simats.com.network.response.NotificationItem>>(emptyList()) }
-    
-    LaunchedEffect(showAdminSettingsAlertsDialog) {
-        if (showAdminSettingsAlertsDialog) {
-            try {
-                val notifs = ApiClient.apiService.getNotifications(com.simats.com.network.request.GetNotificationsRequest("admin"))
-                if (notifs.isSuccessful) {
-                    settingsAlerts = notifs.body()?.notifications?.filter { it.app_source == "Settings" } ?: emptyList()
-                }
-            } catch (e: Exception) {}
-        }
-    }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -87,7 +74,7 @@ fun AdminDashboardScreen(onNavigate: (String) -> Unit = {}) {
                     },
                     actions = {
                         Box(contentAlignment = Alignment.TopEnd, modifier = Modifier.padding(end = 16.dp)) {
-                            IconButton(onClick = { showAdminSettingsAlertsDialog = true }) {
+                            IconButton(onClick = { currentAdminScreen = "SettingsAlerts" }) {
                                 Icon(Icons.Default.Notifications, contentDescription = "Alerts", tint = Color.Black)
                             }
                             Box(modifier = Modifier.padding(top = 8.dp, end = 8.dp).size(8.dp).clip(CircleShape).background(Color.Red))
@@ -111,45 +98,11 @@ fun AdminDashboardScreen(onNavigate: (String) -> Unit = {}) {
                     "Location" -> LocationScreen()
                     "Notifications" -> AdminNotificationsScreen()
                     "Settings" -> SettingsPrivacyScreen(onNavigate = onNavigate)
+                    "SettingsAlerts" -> AdminSettingsAlertsScreen()
                     else -> Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Text("Screen $currentAdminScreen", color = Color.Gray) }
                 }
             }
         }
-    }
-    
-    if (showAdminSettingsAlertsDialog) {
-        val context = androidx.compose.ui.platform.LocalContext.current
-        AlertDialog(
-            onDismissRequest = { showAdminSettingsAlertsDialog = false },
-            title = { Text("User Permission Alerts") },
-            text = {
-                Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                    if (settingsAlerts.isEmpty()) {
-                        Text("No recent permission changes from paired devices.")
-                    } else {
-                        settingsAlerts.forEach { alert ->
-                            Text("- ${alert.message_content}", fontWeight = FontWeight.Bold, color = Color.Black)
-                            Text("  ${alert.timestamp}", style = MaterialTheme.typography.bodySmall, color = Color.Gray, modifier = Modifier.padding(bottom=8.dp))
-                        }
-                    }
-                }
-            },
-            confirmButton = { TextButton(onClick = { showAdminSettingsAlertsDialog = false }) { Text("Close") } },
-            dismissButton = {
-                TextButton(onClick = { 
-                    scope.launch {
-                        try {
-                            val req = com.simats.com.network.request.ClearDataRequest("admin", "notifications")
-                            val res = ApiClient.apiService.clearData(req)
-                            if (res.isSuccessful) {
-                                settingsAlerts = emptyList()
-                                android.widget.Toast.makeText(context, "Deleted successfully from DB!", android.widget.Toast.LENGTH_SHORT).show()
-                            }
-                        } catch(e: Exception) {}
-                    }
-                }) { Text("Clear Data", color = Color.Red, fontWeight = FontWeight.Bold) }
-            }
-        )
     }
 }
 
