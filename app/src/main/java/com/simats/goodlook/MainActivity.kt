@@ -85,8 +85,11 @@ class MainActivity : ComponentActivity() {
             )
         )
         setContent {
-            GoodlookTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            GoodlookTheme(darkTheme = false) {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    containerColor = androidx.compose.ui.graphics.Color.White
+                ) { innerPadding ->
                     androidx.compose.foundation.layout.Box(modifier = Modifier.padding(innerPadding)) {
                         AppNavigation()
                     }
