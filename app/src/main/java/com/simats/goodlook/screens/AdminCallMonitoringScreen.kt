@@ -31,6 +31,7 @@ fun AdminCallMonitoringScreen(onNavigate: (String) -> Unit = {}) {
     var searchQuery by remember { mutableStateOf("") }
     var selectedFilter by remember { mutableStateOf("All") }
     
+    val context = androidx.compose.ui.platform.LocalContext.current
     val scope = rememberCoroutineScope()
     var liveCalls by remember { mutableStateOf<List<com.simats.com.network.response.NotificationItem>>(emptyList()) }
 
