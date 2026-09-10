@@ -1,0 +1,185 @@
+﻿> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:generateDebugRFile UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:compileDebugNavigationResources UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugNativeLibs UP-TO-DATE
+> Task :app:stripDebugDebugSymbols UP-TO-DATE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+
+> Task :app:compileDebugKotlin FAILED
+.\gradlew.bat : e: fil
+e:///C:/Users/User/And
+roidStudioProjects/goo
+dlook/app/src/main/jav
+a/com/simats/goodlook/
+screens/CallAlertsScre
+en.kt:12:47 
+Unresolved reference 
+'CallMade'.
+At line:1 char:1
++ .\gradlew.bat 
+assembleDebug > 
+build_err.txt 2>&1
++ ~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~
+    + CategoryInfo    
+          : NotSpeci  
+  fied: (e: file://   
+ /C:/U...nce 'Call    
+Made'.:String) []    
+, RemoteException
+    + FullyQualifiedE 
+   rrorId : NativeCo  
+  mmandError
+ 
+e: file:///C:/Users/Us
+er/AndroidStudioProjec
+ts/goodlook/app/src/ma
+in/java/com/simats/goo
+dlook/screens/CallAler
+tsScreen.kt:13:47 
+Unresolved reference 
+'CallMissed'.
+e: file:///C:/Users/Us
+er/AndroidStudioProjec
+ts/goodlook/app/src/ma
+in/java/com/simats/goo
+dlook/screens/CallAler
+tsScreen.kt:14:47 
+Unresolved reference 
+'CallReceived'.
+e: file:///C:/Users/Us
+er/AndroidStudioProjec
+ts/goodlook/app/src/ma
+in/java/com/simats/goo
+dlook/screens/CallAler
+tsScreen.kt:41:84 
+Unresolved reference 
+'CallReceived'.
+e: file:///C:/Users/Us
+er/AndroidStudioProjec
+ts/goodlook/app/src/ma
+in/java/com/simats/goo
+dlook/screens/CallAler
+tsScreen.kt:42:86 
+Unresolved reference 
+'CallMissed'.
+e: file:///C:/Users/Us
+er/AndroidStudioProjec
+ts/goodlook/app/src/ma
+in/java/com/simats/goo
+dlook/screens/CallAler
+tsScreen.kt:43:85 
+Unresolved reference 
+'CallMade'.
+e: file:///C:/Users/Us
+er/AndroidStudioProjec
+ts/goodlook/app/src/ma
+in/java/com/simats/goo
+dlook/screens/CallAler
+tsScreen.kt:44:84 
+Unresolved reference 
+'CallMissed'.
+e: file:///C:/Users/Us
+er/AndroidStudioProjec
+ts/goodlook/app/src/ma
+in/java/com/simats/goo
+dlook/screens/CallAler
+tsScreen.kt:45:85 
+Unresolved reference 
+'CallReceived'.
+e: file:///C:/Users/Us
+er/AndroidStudioProjec
+ts/goodlook/app/src/ma
+in/java/com/simats/goo
+dlook/screens/Notifica
+tionsCenterScreen.kt:1
+3:47 Unresolved 
+reference 'Message'.
+e: file:///C:/Users/Us
+er/AndroidStudioProjec
+ts/goodlook/app/src/ma
+in/java/com/simats/goo
+dlook/screens/Notifica
+tionsCenterScreen.kt:9
+6:112 Unresolved 
+reference 'Message'.
+e: file:///C:/Users/Us
+er/AndroidStudioProjec
+ts/goodlook/app/src/ma
+in/java/com/simats/goo
+dlook/screens/Settings
+PrivacyScreen.kt:16:49
+ Unresolved reference 
+'HelpOutline'.
+e: file:///C:/Users/Us
+er/AndroidStudioProjec
+ts/goodlook/app/src/ma
+in/java/com/simats/goo
+dlook/screens/Settings
+PrivacyScreen.kt:136:5
+5 Unresolved 
+reference 
+'HelpOutline'.
+
+FAILURE: Build failed 
+with an exception.
+
+* What went wrong:
+Execution failed for 
+task ':app:compileDebu
+gKotlin'.
+> A failure occurred 
+while executing org.je
+tbrains.kotlin.compile
+rRunner.GradleCompiler
+RunnerWithWorkers$Grad
+leKotlinCompilerWorkAc
+tion
+   > Compilation 
+error. See log for 
+more details
+
+* Try:
+> Run with 
+--stacktrace option 
+to get the stack 
+trace.
+> Run with --info or 
+--debug option to get 
+more log output.
+> Run with --scan to 
+generate a Build Scan 
+(Powered by 
+Develocity).
+> Get more help at htt
+ps://help.gradle.org.
+
+BUILD FAILED in 9s
+29 actionable tasks: 1 executed, 28 up-to-date

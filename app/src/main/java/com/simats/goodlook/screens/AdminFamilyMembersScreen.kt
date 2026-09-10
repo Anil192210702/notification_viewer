@@ -38,9 +38,13 @@ fun AdminFamilyMembersScreen() {
     }
 
     Column(modifier = Modifier.fillMaxSize().background(Color(0xFFFAFAFA))) {
-        TopAppBar(
-            title = { Text("Family Members", fontWeight = FontWeight.Bold, fontSize = 20.sp) },
-            actions = {
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 20.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text("Family Members", fontWeight = FontWeight.Bold, fontSize = 24.sp, color = Color.Black)
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 IconButton(onClick = {
                     scope.launch {
                         try {
@@ -52,12 +56,12 @@ fun AdminFamilyMembersScreen() {
                         } catch(e: Exception) {}
                     }
                 }) {
-                    Icon(Icons.Default.Refresh, contentDescription = "Refresh")
+                    Icon(Icons.Default.Refresh, contentDescription = "Refresh", tint = Color.Black)
                 }
-                Button(onClick = { showAddDialog = true }, modifier = Modifier.padding(end = 16.dp)) { Text("+ Add Member") }
-            },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White, titleContentColor = Color.Black)
-        )
+                Spacer(modifier = Modifier.width(8.dp))
+                Button(onClick = { showAddDialog = true }) { Text("+ Add Member") }
+            }
+        }
         Column(modifier = Modifier.padding(20.dp)) {
         
         Card(modifier = Modifier.fillMaxWidth()) {

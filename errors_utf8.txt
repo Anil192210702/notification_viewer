@@ -1,0 +1,123 @@
+﻿> Task :app:clean
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:processDebugNavigationResources
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:javaPreCompileDebug
+> Task :app:mergeDebugAssets
+> Task :app:compressDebugAssets
+> Task :app:parseDebugLocalResources
+> Task :app:desugarDebugFileDependencies
+> Task :app:generateDebugRFile
+> Task :app:checkDebugDuplicateClasses
+> Task :app:checkDebugAarMetadata
+> Task :app:mergeLibDexDebug
+> Task :app:compileDebugNavigationResources
+> Task :app:mapDebugSourceSetPaths
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:mergeDebugJniLibFolders
+> Task :app:mergeDebugNativeLibs
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so. Run with --info option to learn more.
+
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:processDebugManifestForPackage
+> Task :app:mergeDebugResources
+
+> Task :app:compileDebugKotlin FAILED
+./gradlew : e: file:///C:/
+Users/User/AndroidStudioPr
+ojects/goodlook/app/src/ma
+in/java/com/simats/goodloo
+k/screens/SafetyPreference
+sScreen.kt:12:47 
+Unresolved reference 
+'Chat'.
+At line:1 char:1
++ ./gradlew clean 
+assembleDebug 
+--console=plain > 
+errors.txt 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (e  
+  : file:///C:/U...fere   
+ nce 'Chat'.:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+e: file:///C:/Users/User/A
+ndroidStudioProjects/goodl
+ook/app/src/main/java/com/
+simats/goodlook/screens/Sa
+fetyPreferencesScreen.kt:1
+3:47 Unresolved reference 
+'Devices'.
+e: file:///C:/Users/User/A
+ndroidStudioProjects/goodl
+ook/app/src/main/java/com/
+simats/goodlook/screens/Sa
+fetyPreferencesScreen.kt:3
+9:121 Unresolved 
+reference 'Chat'.
+e: file:///C:/Users/User/A
+ndroidStudioProjects/goodl
+ook/app/src/main/java/com/
+simats/goodlook/screens/Sa
+fetyPreferencesScreen.kt:4
+0:122 Unresolved 
+reference 'Chat'.
+e: file:///C:/Users/User/A
+ndroidStudioProjects/goodl
+ook/app/src/main/java/com/
+simats/goodlook/screens/Sa
+fetyPreferencesScreen.kt:4
+1:96 Unresolved reference 
+'Devices'.
+
+> Task :app:processDebugResources
+> Task :app:mergeExtDexDebug
+
+FAILURE: Build failed 
+with an exception.
+
+* What went wrong:
+Execution failed for task 
+':app:compileDebugKotlin'.
+> A failure occurred 
+while executing org.jetbra
+ins.kotlin.compilerRunner.
+GradleCompilerRunnerWithWo
+rkers$GradleKotlinCompiler
+WorkAction
+   > Compilation error. 
+See log for more details
+
+* Try:
+> Run with --stacktrace 
+option to get the stack 
+trace.
+> Run with --info or 
+--debug option to get 
+more log output.
+> Run with --scan to 
+generate a Build Scan 
+(Powered by Develocity).
+> Get more help at 
+https://help.gradle.org.
+
+BUILD FAILED in 18s
+30 actionable tasks: 30 executed
