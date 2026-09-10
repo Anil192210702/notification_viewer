@@ -12,20 +12,35 @@ android {
     defaultConfig {
         applicationId = "com.simats.goodlook"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            // Placeholder: The actual keys will be provided manually via Android Studio GUI
+            // or environment variables, avoiding plain-text exposure in Gradle
+            storeFile = file("release-key.jks")
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: "password_placeholder"
+            keyAlias = System.getenv("KEY_ALIAS") ?: "alias_placeholder"
+            keyPassword = System.getenv("KEY_PASSWORD") ?: "password_placeholder"
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            val keystoreFile = file("release-key.jks")
+            if (keystoreFile.exists()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
     compileOptions {
