@@ -21,6 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import kotlinx.coroutines.launch
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -63,6 +64,9 @@ fun AdminCallMonitoringScreen(onNavigate: (String) -> Unit = {}) {
                         val res = com.simats.com.network.response.ApiClient.apiService.clearData(req)
                         if (res.isSuccessful) {
                             liveCalls = emptyList()
+                            android.widget.Toast.makeText(context, "Deleted successfully from DB!", android.widget.Toast.LENGTH_SHORT).show()
+                        } else {
+                            android.widget.Toast.makeText(context, "Failed to clear DB. Did you restart the Django server?", android.widget.Toast.LENGTH_LONG).show()
                         }
                     } catch(e: Exception) {}
                 }

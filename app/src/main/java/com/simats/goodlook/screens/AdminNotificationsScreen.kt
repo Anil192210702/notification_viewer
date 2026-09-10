@@ -24,6 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
+import kotlinx.coroutines.launch
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.simats.com.network.response.ApiClient
@@ -91,6 +92,9 @@ fun AdminNotificationsScreen() {
                             val res = com.simats.com.network.response.ApiClient.apiService.clearData(req)
                             if (res.isSuccessful) {
                                 notifications = emptyList()
+                                android.widget.Toast.makeText(context, "Deleted successfully from DB!", android.widget.Toast.LENGTH_SHORT).show()
+                            } else {
+                                android.widget.Toast.makeText(context, "Failed to clear DB. Did you restart the Django server?", android.widget.Toast.LENGTH_LONG).show()
                             }
                         } catch(e: Exception) {}
                     }
