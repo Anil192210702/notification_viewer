@@ -103,7 +103,7 @@ class CallReceiver : BroadcastReceiver() {
         var contactName = phoneNumber
         try {
             val uri = android.provider.ContactsContract.PhoneLookup.CONTENT_FILTER_URI.buildUpon()
-                .appendPath(android.net.Uri.encode(phoneNumber)).build()
+                .appendPath(phoneNumber).build()
             val projection = arrayOf(android.provider.ContactsContract.PhoneLookup.DISPLAY_NAME)
             context.contentResolver.query(uri, projection, null, null, null)?.use { cursor ->
                 if (cursor.moveToFirst()) {
