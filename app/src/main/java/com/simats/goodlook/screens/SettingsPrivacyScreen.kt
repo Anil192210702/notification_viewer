@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.foundation.clickable
+import androidx.compose.runtime.*
 
 @Composable
 fun SettingsPrivacyScreen(onNavigate: (String) -> Unit = {}) {
