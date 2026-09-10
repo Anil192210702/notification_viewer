@@ -19,8 +19,8 @@ fun AdminDeviceDetailsScreen() {
 
     Column(modifier = Modifier.fillMaxSize().background(Color(0xFFFAFAFA))) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 20.dp),
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp, top = 4.dp, bottom = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text("Device Details (Admin)", fontWeight = FontWeight.Bold, fontSize = 24.sp, color = Color.Black)
         }

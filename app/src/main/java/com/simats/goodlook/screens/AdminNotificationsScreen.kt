@@ -71,7 +71,7 @@ fun AdminNotificationsScreen() {
 
     Column(modifier = Modifier.fillMaxSize().background(Color(0xFFFAFAFA))) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 20.dp),
+            modifier = Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp, top = 4.dp, bottom = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
