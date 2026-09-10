@@ -40,7 +40,16 @@ fun CreateAccountScreen(
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(value = email, onValueChange = { email = it }, label = { Text("Email Address") }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp))
         Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(value = phone, onValueChange = { phone = it }, label = { Text("Phone Number") }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp))
+        OutlinedTextField(
+            value = phone, 
+            onValueChange = { 
+                if (it.length <= 10 && it.all { char -> char.isDigit() }) phone = it 
+            }, 
+            label = { Text("Phone Number") }, 
+            modifier = Modifier.fillMaxWidth(), 
+            shape = RoundedCornerShape(12.dp),
+            keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = androidx.compose.ui.text.input.KeyboardType.Number)
+        )
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(value = password, onValueChange = { password = it }, label = { Text("Password") }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp))
         Spacer(modifier = Modifier.height(16.dp))
@@ -55,8 +64,11 @@ fun CreateAccountScreen(
         Spacer(modifier = Modifier.weight(1f))
         Button(
             onClick = {
+                val isValidPhone = phone.length == 10 && (phone.startsWith("6") || phone.startsWith("7") || phone.startsWith("8") || phone.startsWith("9"))
                 if (!agreed) {
                     Toast.makeText(context, "Please agree to terms", Toast.LENGTH_SHORT).show()
+                } else if (!isValidPhone) {
+                    Toast.makeText(context, "Phone must be 10 digits starting with 6, 7, 8, or 9", Toast.LENGTH_SHORT).show()
                 } else if (password != confirmPassword) {
                     Toast.makeText(context, "Passwords do not match", Toast.LENGTH_SHORT).show()
                 } else {
