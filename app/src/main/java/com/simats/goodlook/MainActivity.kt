@@ -237,5 +237,14 @@ fun AppNavigation() {
         composable("call_details") {
             com.simats.goodlook.screens.CallDetailsScreen()
         }
+        composable("profile") {
+            com.simats.goodlook.screens.ProfileAccountScreen()
+        }
+        composable("support") {
+            com.simats.goodlook.screens.HelpSupportScreen()
+        }
+        composable("about") {
+            com.simats.goodlook.screens.AboutAppScreen()
+        }
     }
 }

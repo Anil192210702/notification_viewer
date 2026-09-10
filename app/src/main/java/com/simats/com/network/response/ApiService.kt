@@ -42,4 +42,10 @@ interface ApiService {
 
     @POST("api/clear_data/")
     suspend fun clearData(@Body request: com.simats.com.network.request.ClearDataRequest): Response<com.simats.com.network.response.ClearDataResponse>
+
+    @POST("api/get_profile/")
+    suspend fun getProfile(@Body request: com.simats.com.network.request.GetProfileRequest): Response<com.simats.com.network.response.ProfileResponse>
+
+    @POST("api/update_profile/")
+    suspend fun updateProfile(@Body request: com.simats.com.network.request.UpdateProfileRequest): Response<Any>
 }

@@ -113,7 +113,7 @@ fun SettingsPrivacyScreen(onNavigate: (String) -> Unit = {}) {
                 SettingsItemRow(
                     icon = Icons.Default.Person, 
                     title = "Profile & Account",
-                    onClick = { /* TBD if Profile screen exists */ }
+                    onClick = { onNavigate("profile") }
                 )
                 HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp), color = Color(0xFFF3F4F6))
                 SettingsItemRow(
@@ -144,13 +144,13 @@ fun SettingsPrivacyScreen(onNavigate: (String) -> Unit = {}) {
                 SettingsItemRow(
                     icon = Icons.Default.Info, 
                     title = "Help & Support",
-                    onClick = { }
+                    onClick = { onNavigate("support") }
                 )
                 HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp), color = Color(0xFFF3F4F6))
                 SettingsItemRow(
                     icon = Icons.Default.Info, 
                     title = "About App",
-                    onClick = { }
+                    onClick = { onNavigate("about") }
                 )
             }
         }
